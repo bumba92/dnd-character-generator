@@ -1,17 +1,19 @@
-character = {
-    "name": "Thorin",
-    "class": "Fighter",
-    "Level": 5,
-    "race": "Dwarf",
-    "languages": ["Common", "Dwarvish"],
-    "equipment": ["Battleaxe", "Shield", "Chainmail"],
-}
+def create_character(name, character_class, level):
+    return {
+        "name": name,
+        "class": character_class,
+        "level": level
+    }
 
-#Werte abrufen:
+def print_character(character):
+    print(f"\n--- Charakter ---")
+    print(f"Name: {character['name']}")
+    print(f"Klasse: {character['class']}")
+    print(f"Level: {character['level']}")
 
-print(character["languages"])  # Ausgabe: ['Common', 'Dwarvish']
+name = input("Charaktername: ")
+character_class = input("Charakterklasse: ")
+level = int(input("Level: "))
 
-print(character["equipment"][0])
-
-for item in character["equipment"]:
-    print(f"-{item}")
+character = create_character(name, character_class, level)
+print_character(character)
