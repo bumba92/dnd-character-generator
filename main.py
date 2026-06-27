@@ -1,16 +1,3 @@
-def create_character(name, character_class, level):
-    return {
-        "name": name,
-        "class": character_class,
-        "level": level
-    }
-
-def print_character(character):
-    print(f"\n--- Charakter ---")
-    print(f"Name: {character['name']}")
-    print(f"Klasse: {character['class']}")
-    print(f"Level: {character['level']}")
-
 class Character:
     def __init__(self, name, race, character_class, level, background):
         self.name = name
@@ -30,13 +17,35 @@ class Character:
 
     def get_PB(self):
         return (self.level - 1) // 4 + 2
-    
-hero_1 = Character("Aragorn", "Mensch", "Krieger", 5, "König von Gondor")
-hero_2 = Character("Gandalf", "Maia", "Zauberer", 20, "Weiser Mentor")
 
+def get_level_input():
+    while True:
+        try:
+            level = int(input("Level: "))
+            if level < 1 or level > 20:
+                print("Level muss zwischen 1 und 20 liegen!")
+            else:
+                break
+        except ValueError:
+                print("Bitte eine Ganze Zahl eingeben!")
+    return level
+
+def create_character_from_input():
+    tmp_char = Character(
+        input("Name: "),
+        input("Rasse: "),
+        input("Klasse: "),
+        get_level_input(),        
+        input("Hintergrund: ")
+    )
+    return tmp_char
+
+
+hero_1 = create_character_from_input()
 hero_1.describe()
 print (f"Proficiency Bonus: {hero_1.get_PB()}")
 print("\n")
+hero_2 = create_character_from_input()
 hero_2.describe()
 print (f"Proficiency Bonus: {hero_2.get_PB()}")
 
