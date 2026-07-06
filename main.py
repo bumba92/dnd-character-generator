@@ -1,3 +1,5 @@
+import json
+
 class Character:
     def __init__(self, name, race, character_class, level, background):
         self.name = name
@@ -26,6 +28,7 @@ def get_level_input():
                 print("Level muss zwischen 1 und 20 liegen!")
             else:
                 break
+                return level
         except ValueError:
                 print("Bitte eine Ganze Zahl eingeben!")
     return level
@@ -40,12 +43,35 @@ def create_character_from_input():
     )
     return tmp_char
 
+def load_race():
+    with open("data/races.json", "r", encoding="utf-8") as f:
+        return json.load(f)
 
-hero_1 = create_character_from_input()
-hero_1.describe()
-print (f"Proficiency Bonus: {hero_1.get_PB()}")
-print("\n")
-hero_2 = create_character_from_input()
-hero_2.describe()
-print (f"Proficiency Bonus: {hero_2.get_PB()}")
+def select_race():
+    races = load_race()
+    n = len(races["race"])
+    for i, race in enumerate(races["race"]):
+        print(f"{i+1}. {race['name']}")
+    
+    print(f"Bitte wähle eine Rasse (1-{n}): ")
+    while True:
+        try:
+            choice = int(input())
+            if 1 <= choice <= n:
+                return races["race"][choice - 1]
+            else:
+                print(f"Bitte wähle eine Zahl zwischen 1 und {n}!")
+        except ValueError:
+            print("Bitte eine Ganze Zahl eingeben!")
+
+races = select_race()
+
+
+# hero_1 = create_character_from_input()
+# hero_1.describe()
+# print (f"Proficiency Bonus: {hero_1.get_PB()}")
+# print("\n")
+# hero_2 = create_character_from_input()
+# hero_2.describe()
+# print (f"Proficiency Bonus: {hero_2.get_PB()}")
 
