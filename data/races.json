@@ -1,7 +1,0 @@
-{
-    "race": [
-        {"name": "Mensch", "speed": 30, "languages":["Gemeinsprache"]},
-        {"name": "Elf", "speed": 30, "languages":["Gemeinsprache", "Elvisch"]}
-    ]
-       
-}

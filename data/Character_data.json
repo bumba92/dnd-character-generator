@@ -1,0 +1,14 @@
+{
+    "race": [
+        {"name": "Mensch", "speed": 30, "languages":["Gemeinsprache"]},
+        {"name": "Elf", "speed": 30, "languages":["Gemeinsprache", "Elvisch"]}
+    ],
+    "class": [
+        {"name": "Krieger", "hit_die": 10, "primary_ability": "Stärke"},
+        {"name": "Magier", "hit_die": 6, "primary_ability": "Intelligenz"}
+    ],
+    "background": [
+        {"name": "Adliger", "skills":["Überreden", "Einschüchtern"]},
+        {"name": "Dieb", "skills":["Schleichen", "Diebstahl"]}
+    ]
+}

@@ -36,42 +36,48 @@ def get_level_input():
 def create_character_from_input():
     tmp_char = Character(
         input("Name: "),
-        input("Rasse: "),
-        input("Klasse: "),
-        get_level_input(),        
-        input("Hintergrund: ")
+        select_option(data, "race", "Wähle eine Rasse")["name"],
+        select_option(data, "class", "Wähle eine Klasse")["name"],
+        get_level_input(),
+        select_option(data, "background", "Wähle einen Hintergrund")["name"]
     )
     return tmp_char
 
-def load_race():
-    with open("data/races.json", "r", encoding="utf-8") as f:
+def load_data():
+    with open("data/Character_data.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
-def select_race():
-    races = load_race()
-    n = len(races["race"])
-    for i, race in enumerate(races["race"]):
-        print(f"{i+1}. {race['name']}")
-    
-    print(f"Bitte wähle eine Rasse (1-{n}): ")
+def select_option(data, category, prombt):
+    options = data[category]
+    n = len(options)
+
+    for i, option in enumerate(options):
+        print(f"{i+1}. {option['name']}") 
     while True:
         try:
-            choice = int(input())
+            choice = int(input(f"{prombt} (1-{n}): "))
             if 1 <= choice <= n:
-                return races["race"][choice - 1]
+                return options[choice - 1]
             else:
                 print(f"Bitte wähle eine Zahl zwischen 1 und {n}!")
         except ValueError:
             print("Bitte eine Ganze Zahl eingeben!")
 
-races = select_race()
 
 
-# hero_1 = create_character_from_input()
-# hero_1.describe()
-# print (f"Proficiency Bonus: {hero_1.get_PB()}")
-# print("\n")
-# hero_2 = create_character_from_input()
-# hero_2.describe()
-# print (f"Proficiency Bonus: {hero_2.get_PB()}")
+data = load_data()
+# races = select_option(data, "race", "Wähle eine Rasse")
+# classes = select_option(data, "class", "Wähle eine Klasse")
+# background = select_option(data, "background", "Wähle einen Hintergrund")
+
+
+
+
+hero_1 = create_character_from_input()
+hero_1.describe()
+print (f"Proficiency Bonus: {hero_1.get_PB()}")
+print("\n")
+hero_2 = create_character_from_input()
+hero_2.describe()
+print (f"Proficiency Bonus: {hero_2.get_PB()}")
 
