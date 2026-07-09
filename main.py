@@ -73,11 +73,18 @@ data = load_data()
 
 
 
-hero_1 = create_character_from_input()
-hero_1.describe()
-print (f"Proficiency Bonus: {hero_1.get_PB()}")
-print("\n")
-hero_2 = create_character_from_input()
-hero_2.describe()
-print (f"Proficiency Bonus: {hero_2.get_PB()}")
+# hero_1 = create_character_from_input()
+# hero_1.describe()
+# print (f"Proficiency Bonus: {hero_1.get_PB()}")
+# print("\n")
+# hero_2 = create_character_from_input()
+# hero_2.describe()
+# print (f"Proficiency Bonus: {hero_2.get_PB()}")
+
+from fpdf import FPDF
+pdf = FPDF()
+pdf.add_page()
+pdf.set_font("Helvetica", size=16)
+pdf.cell(text="D&D Charakterbogen")
+pdf.output("test.pdf")
 
