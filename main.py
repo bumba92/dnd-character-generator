@@ -1,4 +1,5 @@
 import json
+from fpdf import FPDF
 
 class Character:
     def __init__(self, name, race, character_class, level, background):
@@ -63,7 +64,26 @@ def select_option(data, category, prombt):
         except ValueError:
             print("Bitte eine Ganze Zahl eingeben!")
 
+def generate_pdf(character):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Helvetica", style="B", size=16)
+    pdf.cell(text="D&D Charakterbogen")
+    pdf.set_font("Helvetica", size=12)
+    pdf.ln(10)
+    pdf.cell(text=f"Name: {hero_1.name}")
+    pdf.ln(10)
+    pdf.cell(text=f"Rasse: {hero_1.race}")
+    pdf.ln(10)
+    pdf.cell(text=f"Klasse: {hero_1.character_class}")
+    pdf.ln(10)
+    pdf.cell(text=f"Level: {hero_1.level}")
+    pdf.ln(10)
+    pdf.cell(text=f"Hintergrund: {hero_1.background}")
+    pdf.ln(10)
+    pdf.cell(text=f"Proficiency Bonus: {hero_1.get_PB()}")
 
+    pdf.output(f"{hero_1.name}_character_sheet.pdf")
 
 data = load_data()
 # races = select_option(data, "race", "Wähle eine Rasse")
@@ -73,18 +93,10 @@ data = load_data()
 
 
 
-# hero_1 = create_character_from_input()
-# hero_1.describe()
-# print (f"Proficiency Bonus: {hero_1.get_PB()}")
-# print("\n")
-# hero_2 = create_character_from_input()
-# hero_2.describe()
-# print (f"Proficiency Bonus: {hero_2.get_PB()}")
+hero_1 = create_character_from_input()
+hero_1.describe()
+print (f"Proficiency Bonus: {hero_1.get_PB()}")
+print("\n")
 
-from fpdf import FPDF
-pdf = FPDF()
-pdf.add_page()
-pdf.set_font("Helvetica", size=16)
-pdf.cell(text="D&D Charakterbogen")
-pdf.output("test.pdf")
+generate_pdf(hero_1)
 
